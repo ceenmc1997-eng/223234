@@ -1,36 +1,19 @@
-import { useState, useEffect } from "react";
-import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle, Send } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Fix for default marker icon
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-});
-
-// Custom green marker
-const greenIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
 const Contact = () => {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,7 +24,90 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // G&A Pallet coordinates
-  const position = [29.742314, -95.269826];
+  const lng = -95.269826;
+  const lat = 29.742314;
+
+  useEffect(() => {
+    if (map.current) return;
+
+    map.current = new maplibregl.Map({
+      container: mapContainer.current,
+      style: {
+        version: 8,
+        sources: {
+          "carto-dark": {
+            type: "raster",
+            tiles: [
+              "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+              "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+              "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+            ],
+            tileSize: 256,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          },
+        },
+        layers: [
+          {
+            id: "carto-dark-layer",
+            type: "raster",
+            source: "carto-dark",
+            minzoom: 0,
+            maxzoom: 22,
+          },
+        ],
+      },
+      center: [lng, lat],
+      zoom: 14,
+    });
+
+    // Add navigation controls
+    map.current.addControl(new maplibregl.NavigationControl(), "top-left");
+
+    // Create custom marker element
+    const markerEl = document.createElement("div");
+    markerEl.innerHTML = `
+      <div style="
+        width: 40px;
+        height: 40px;
+        background: #22C55E;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+      ">
+        <div style="
+          width: 16px;
+          height: 16px;
+          background: white;
+          border-radius: 50%;
+          transform: rotate(45deg);
+        "></div>
+      </div>
+    `;
+
+    // Add marker
+    new maplibregl.Marker({ element: markerEl })
+      .setLngLat([lng, lat])
+      .setPopup(
+        new maplibregl.Popup({ offset: 25, className: "dark-popup" }).setHTML(`
+          <div style="padding: 8px; color: #000;">
+            <strong>G&A Pallet</strong><br/>
+            8827 Clinton Dr<br/>
+            Houston, TX 77029
+          </div>
+        `)
+      )
+      .addTo(map.current);
+
+    return () => {
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, []);
 
   const contactInfo = [
     {
@@ -180,32 +246,10 @@ const Contact = () => {
                 Our Location
               </h2>
               <div
+                ref={mapContainer}
                 data-testid="contact-map"
                 className="rounded-xl overflow-hidden border border-zinc-800 h-[400px] lg:h-[500px]"
-              >
-                <MapContainer
-                  center={position}
-                  zoom={15}
-                  scrollWheelZoom={false}
-                  style={{ height: "100%", width: "100%" }}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker position={position} icon={greenIcon}>
-                    <Popup>
-                      <div className="text-center">
-                        <strong>G&A Pallet</strong>
-                        <br />
-                        8827 Clinton Dr
-                        <br />
-                        Houston, TX 77029
-                      </div>
-                    </Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
+              />
               <div className="mt-6 flex flex-wrap gap-4">
                 <a
                   href="https://maps.google.com/?q=8827+Clinton+Dr,+Houston,+TX+77029"
@@ -219,6 +263,14 @@ const Contact = () => {
                   >
                     <MapPin className="w-4 h-4 mr-2" />
                     Get Directions
+                  </Button>
+                </a>
+                <a href="tel:+17136708118">
+                  <Button
+                    className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full"
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Now
                   </Button>
                 </a>
               </div>
