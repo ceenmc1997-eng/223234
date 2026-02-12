@@ -1,15 +1,14 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
-
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,46 +24,101 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-
 # Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
+class ContactRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    name: str
+    email: str
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    message: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+class ContactRequestCreate(BaseModel):
+    name: str
+    email: str
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    message: str
 
-# Add your routes to the router instead of directly to app
+class QuoteRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: str
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    pallet_type: str
+    quantity: Optional[int] = None
+    dimensions: Optional[str] = None
+    additional_info: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class QuoteRequestCreate(BaseModel):
+    name: str
+    email: str
+    phone: Optional[str] = None
+    company: Optional[str] = None
+    pallet_type: str
+    quantity: Optional[int] = None
+    dimensions: Optional[str] = None
+    additional_info: Optional[str] = None
+
+# Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "G&A Pallet API"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
+@api_router.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "G&A Pallet API"}
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+# Contact endpoints
+@api_router.post("/contact", response_model=ContactRequest)
+async def create_contact_request(input: ContactRequestCreate):
+    contact_dict = input.model_dump()
+    contact_obj = ContactRequest(**contact_dict)
     
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
+    doc = contact_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
     
-    return status_checks
+    await db.contact_requests.insert_one(doc)
+    return contact_obj
+
+@api_router.get("/contact", response_model=List[ContactRequest])
+async def get_contact_requests():
+    contacts = await db.contact_requests.find({}, {"_id": 0}).to_list(1000)
+    
+    for contact in contacts:
+        if isinstance(contact['created_at'], str):
+            contact['created_at'] = datetime.fromisoformat(contact['created_at'])
+    
+    return contacts
+
+# Quote endpoints
+@api_router.post("/quote", response_model=QuoteRequest)
+async def create_quote_request(input: QuoteRequestCreate):
+    quote_dict = input.model_dump()
+    quote_obj = QuoteRequest(**quote_dict)
+    
+    doc = quote_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.quote_requests.insert_one(doc)
+    return quote_obj
+
+@api_router.get("/quote", response_model=List[QuoteRequest])
+async def get_quote_requests():
+    quotes = await db.quote_requests.find({}, {"_id": 0}).to_list(1000)
+    
+    for quote in quotes:
+        if isinstance(quote['created_at'], str):
+            quote['created_at'] = datetime.fromisoformat(quote['created_at'])
+    
+    return quotes
 
 # Include the router in the main app
 app.include_router(api_router)

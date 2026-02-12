@@ -1,34 +1,157 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* G&A Pallet - Custom Styles */
+
+/* Hero gradient overlay */
+.hero-overlay {
+    background: linear-gradient(to bottom, rgba(9,9,11,0) 0%, rgba(9,9,11,0.6) 40%, #09090B 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+/* Card hover effects */
+.card-hover {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(34, 197, 94, 0.1);
+}
+
+/* Button glow */
+.btn-glow {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Navigation link hover */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #22C55E;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Image hover zoom */
+.img-zoom {
+    overflow: hidden;
+}
+
+.img-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.img-zoom:hover img {
+    transform: scale(1.05);
+}
+
+/* Gradient text (used sparingly) */
+.gradient-text {
+    background: linear-gradient(135deg, #22C55E 0%, #4ADE80 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Section divider */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #27272A, transparent);
+}
+
+/* Stat card pulse */
+.stat-pulse {
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
     }
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Form focus styles */
+.form-input:focus {
+    border-color: #22C55E;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
 }
 
-.App-link {
-    color: #61dafb;
+/* Machinery spec tag */
+.spec-tag {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22C55E;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
+/* Page transition */
+.page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Mobile menu */
+.mobile-menu {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Bento grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+.bento-item-1 {
+    grid-column: span 8;
+}
+
+.bento-item-2 {
+    grid-column: span 4;
+}
+
+.bento-item-3 {
+    grid-column: span 4;
+}
+
+.bento-item-4 {
+    grid-column: span 8;
+}
+
+@media (max-width: 768px) {
+    .bento-item-1,
+    .bento-item-2,
+    .bento-item-3,
+    .bento-item-4 {
+        grid-column: span 12;
     }
 }
