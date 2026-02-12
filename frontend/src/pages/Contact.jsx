@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MapPin, Phone, Mail, Clock, ArrowRight, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Send, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
