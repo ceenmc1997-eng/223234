@@ -1,35 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Package, CheckCircle, Info, Phone, Truck, Shield, Clock, Star } from "lucide-react";
+import { ArrowRight, Package, CheckCircle, Phone, Truck, Shield, Clock, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { toast } from "sonner";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
 
 const Pallets = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    pallet_type: "",
-    quantity: "",
-    dimensions: "",
-    additional_info: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   // Real pallet specifications from industry standards
   const palletTypes = [
     {
@@ -141,53 +114,6 @@ const Pallets = () => {
     },
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (value) => {
-    setFormData((prev) => ({ ...prev, pallet_type: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.pallet_type) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const payload = {
-        ...formData,
-        quantity: formData.quantity ? parseInt(formData.quantity) : null,
-      };
-
-      await axios.post(`${API}/quote`, payload);
-      
-      toast.success("Quote request submitted! We'll contact you within 24 hours.");
-      
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        pallet_type: "",
-        quantity: "",
-        dimensions: "",
-        additional_info: "",
-      });
-    } catch (error) {
-      console.error("Error submitting quote:", error);
-      toast.error("Failed to submit. Please try again or call us directly.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div data-testid="pallets-page" className="min-h-screen pt-24">
       {/* Hero Section */}
@@ -215,16 +141,16 @@ const Pallets = () => {
               and specialty pallets available. Heat treatment (ISPM-15) for export shipments.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#quote-form">
+              <Link to="/contact#contact-form-section">
                 <Button
                   data-testid="hero-quote-btn"
                   size="lg"
-                  className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-8 py-6 text-base font-semibold"
+                  className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 rounded-full px-8 py-6 text-base font-semibold"
                 >
-                  Get Free Quote
+                  Request Quote
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
-              </a>
+              </Link>
               <a href="tel:+17136708118">
                 <Button
                   variant="outline"
@@ -325,7 +251,7 @@ const Pallets = () => {
                     </li>
                   ))}
                 </ul>
-                <a href="#quote-form">
+                <Link to="/contact#contact-form-section">
                   <Button
                     variant="outline"
                     size="sm"
@@ -333,7 +259,7 @@ const Pallets = () => {
                   >
                     Request Quote
                   </Button>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -353,287 +279,54 @@ const Pallets = () => {
                 <a href="tel:+17136708118">
                   <Button
                     size="lg"
-                    className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-6"
+                    className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 rounded-full px-6"
                   >
                     <Phone className="w-4 h-4 mr-2" />
                     Call Us
                   </Button>
                 </a>
-                <a href="#quote-form">
+                <Link to="/contact#contact-form-section">
                   <Button
                     variant="outline"
                     size="lg"
                     className="border-zinc-700 text-white hover:bg-zinc-800 rounded-full px-6"
                   >
-                    Get Quote
+                    Contact Us
                   </Button>
-                </a>
+                </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quote Request Form */}
-      <section className="py-24 md:py-32 bg-zinc-900/30" id="quote-form">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-              <span className="text-[#22C55E] text-sm font-medium uppercase tracking-wider mb-4 block">
-                Get Started
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
-                Request a Free Quote
-              </h2>
-              <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-                Tell us what you need and we'll get back to you within 24 hours 
-                with pricing. No obligation.
-              </p>
-              
-              <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <Info className="w-5 h-5 text-[#22C55E] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">Volume Discounts</h4>
-                    <p className="text-zinc-400 text-sm">
-                      Orders of 100+ pallets qualify for special pricing. 
-                      Ask about recurring order discounts for long-term partnerships.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Free quote within 24 hours</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">New and recycled options available</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">ISPM-15 heat treatment available</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Delivery throughout Texas & nationwide</span>
-                </div>
-              </div>
-
-              {/* Quick Contact */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="tel:+17136708118" className="flex-1">
-                  <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-4 hover:border-[#22C55E]/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-[#22C55E]" />
-                      <div>
-                        <p className="text-zinc-500 text-xs">Call us</p>
-                        <p className="text-white font-semibold">(713) 670-8118</p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <a href="mailto:sales@gapallet.com" className="flex-1">
-                  <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-4 hover:border-[#22C55E]/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <ArrowRight className="w-5 h-5 text-[#22C55E]" />
-                      <div>
-                        <p className="text-zinc-500 text-xs">Email us</p>
-                        <p className="text-white font-semibold">sales@gapallet.com</p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <form
-                onSubmit={handleSubmit}
-                data-testid="quote-form"
-                className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 md:p-8"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-zinc-300">
-                      Name <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Your name"
-                      data-testid="quote-name-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-zinc-300">
-                      Email <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="your@email.com"
-                      data-testid="quote-email-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-zinc-300">Phone</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="(xxx) xxx-xxxx"
-                      data-testid="quote-phone-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-zinc-300">Company</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      placeholder="Company name"
-                      data-testid="quote-company-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2 mb-6">
-                  <Label className="text-zinc-300">
-                    Pallet Type <span className="text-red-500">*</span>
-                  </Label>
-                  <Select value={formData.pallet_type} onValueChange={handleSelectChange}>
-                    <SelectTrigger 
-                      data-testid="quote-pallet-type-select" 
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                    >
-                      <SelectValue placeholder="Select pallet type" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-zinc-900 border-zinc-800">
-                      {palletTypes.map((pallet) => (
-                        <SelectItem 
-                          key={pallet.name} 
-                          value={pallet.name}
-                          className="text-zinc-300 focus:bg-zinc-800 focus:text-white"
-                        >
-                          {pallet.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="quantity" className="text-zinc-300">Quantity Needed</Label>
-                    <Input
-                      id="quantity"
-                      name="quantity"
-                      type="number"
-                      value={formData.quantity}
-                      onChange={handleInputChange}
-                      placeholder="Number of pallets"
-                      data-testid="quote-quantity-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="dimensions" className="text-zinc-300">
-                      Custom Dimensions
-                    </Label>
-                    <Input
-                      id="dimensions"
-                      name="dimensions"
-                      value={formData.dimensions}
-                      onChange={handleInputChange}
-                      placeholder='e.g., 48" × 40" × 6"'
-                      data-testid="quote-dimensions-input"
-                      className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2 mb-8">
-                  <Label htmlFor="additional_info" className="text-zinc-300">
-                    Additional Information
-                  </Label>
-                  <textarea
-                    id="additional_info"
-                    name="additional_info"
-                    value={formData.additional_info}
-                    onChange={handleInputChange}
-                    placeholder="Delivery location, timeline, special requirements (heat treatment, export, etc.)"
-                    data-testid="quote-additional-info-input"
-                    rows={4}
-                    className="w-full bg-zinc-950 border border-zinc-800 focus:border-[#22C55E] rounded-md px-3 py-2 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#22C55E] resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  data-testid="quote-submit-btn"
-                  disabled={isSubmitting}
-                  className="w-full bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full py-6 text-base font-semibold"
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Quote Request"}
-                  {!isSubmitting && <ArrowRight className="w-5 h-5 ml-2" />}
-                </Button>
-
-                <p className="text-zinc-500 text-xs text-center mt-4">
-                  We respond to all quote requests within 24 business hours.
-                </p>
-              </form>
             </div>
           </div>
         </div>
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 md:py-24">
+      <section className="py-24 md:py-32 bg-zinc-900/30">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Prefer to Talk?
+            Ready to Order?
           </h3>
           <p className="text-zinc-400 mb-8">
-            Our team is ready to help. Call or email for immediate assistance.
+            Contact us today for a free quote. Our team responds within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="tel:+17136708118">
+            <Link to="/contact#contact-form-section">
               <Button
                 size="lg"
-                className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-8 py-6 text-base font-semibold"
+                className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 rounded-full px-8 py-6 text-base font-semibold"
               >
-                <Phone className="w-5 h-5 mr-2" />
-                (713) 670-8118
+                Get Free Quote
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-            </a>
-            <a href="mailto:sales@gapallet.com">
+            </Link>
+            <a href="tel:+17136708118">
               <Button
                 variant="outline"
                 size="lg"
                 className="border-zinc-700 text-white hover:bg-zinc-800 hover:text-white rounded-full px-8 py-6 text-base"
               >
-                sales@gapallet.com
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <Phone className="w-5 h-5 mr-2" />
+                (713) 670-8118
               </Button>
             </a>
           </div>
