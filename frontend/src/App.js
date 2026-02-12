@@ -10,6 +10,7 @@ import { PageSkeleton } from "@/components/Skeleton";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Services = lazy(() => import("@/pages/Services"));
+const TPM = lazy(() => import("@/pages/TPM"));
 const Machinery = lazy(() => import("@/pages/Machinery"));
 const Pallets = lazy(() => import("@/pages/Pallets"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/tpm" element={<TPM />} />
               <Route path="/machinery" element={<Machinery />} />
               <Route path="/pallets" element={<Pallets />} />
               <Route path="/contact" element={<Contact />} />
