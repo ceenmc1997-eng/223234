@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, ArrowRight, Send, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +13,9 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const Contact = () => {
+  const location = useLocation();
   const mapContainer = useRef(null);
+  const formRef = useRef(null);
   const map = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
