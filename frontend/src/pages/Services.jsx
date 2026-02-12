@@ -269,8 +269,8 @@ const Services = () => {
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1000&q=80"
-                  alt="Warehouse operations"
+                  src="https://images.unsplash.com/photo-1615063400892-5e2508ec9a12?auto=format&fit=crop&w=1000&q=80"
+                  alt="Stacked wooden pallets"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>

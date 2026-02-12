@@ -79,8 +79,8 @@ const About = () => {
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80"
-                  alt="Industrial operations"
+                  src="https://images.unsplash.com/photo-1706027554815-ae587412dbef?auto=format&fit=crop&w=1000&q=80"
+                  alt="Wood pallet warehouse"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>

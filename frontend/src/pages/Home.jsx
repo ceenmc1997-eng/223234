@@ -49,8 +49,8 @@ const Home = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2000&q=80"
-            alt="Industrial warehouse"
+            src="https://images.unsplash.com/photo-1764046155497-ad7e50737ffa?auto=format&fit=crop&w=2000&q=80"
+            alt="Warehouse with wooden pallets"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 hero-overlay" />
@@ -212,8 +212,8 @@ const Home = () => {
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1000&q=80"
-                  alt="Industrial machinery"
+                  src="https://images.unsplash.com/photo-1767281075989-7571356d477e?auto=format&fit=crop&w=1000&q=80"
+                  alt="Wood processing machinery with stacked lumber"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
@@ -229,8 +229,8 @@ const Home = () => {
             <div className="order-2 lg:order-1">
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1000&q=80"
-                  alt="Warehouse operations"
+                  src="https://images.unsplash.com/photo-1564691848938-d0fc26235733?auto=format&fit=crop&w=1000&q=80"
+                  alt="Stacked wooden pallets"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
