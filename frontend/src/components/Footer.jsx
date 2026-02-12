@@ -120,8 +120,9 @@ const Footer = () => {
                 <div className="flex items-start gap-3 text-zinc-400">
                   <Clock className="w-4 h-4 mt-0.5 text-[#22C55E] flex-shrink-0" />
                   <span className="text-sm">
-                    Mon - Fri: 9am - 5pm<br />
-                    Saturday: 10am - 2pm
+                    Mon - Fri: 8am - 5pm<br />
+                    Sat - Sun: Closed
+                    <span className="block text-zinc-600 text-xs mt-1">Central Time (CST)</span>
                   </span>
                 </div>
               </li>
