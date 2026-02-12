@@ -174,6 +174,15 @@ const Contact = () => {
 
   const [businessStatus, setBusinessStatus] = useState(getBusinessStatus());
 
+  // Scroll to form if hash is present
+  useEffect(() => {
+    if (location.hash === "#contact-form-section" && formRef.current) {
+      setTimeout(() => {
+        formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [location]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setBusinessStatus(getBusinessStatus());
