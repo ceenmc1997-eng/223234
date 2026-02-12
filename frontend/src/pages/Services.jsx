@@ -148,7 +148,7 @@ const Services = () => {
                 adheres to all customer and G&A safety guidelines.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/pallets">
+                <Link to="/contact#contact-form-section">
                   <Button
                     data-testid="services-quote-btn"
                     className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-6"
@@ -436,7 +436,7 @@ const Services = () => {
             Let our team create a custom TPM plan for your business. We're here to serve you.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/pallets">
+            <Link to="/contact#contact-form-section">
               <Button
                 data-testid="services-cta-quote-btn"
                 size="lg"

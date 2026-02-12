@@ -103,7 +103,7 @@ const Machinery = () => {
                 <span className="spec-tag">Automated Production</span>
               </div>
               <div className="flex flex-wrap gap-4">
-                <Link to="/pallets">
+                <Link to="/contact#contact-form-section">
                   <Button
                     className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-6"
                   >
@@ -346,7 +346,7 @@ const Machinery = () => {
             Contact us today to discuss your pallet needs.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/pallets">
+            <Link to="/contact#contact-form-section">
               <Button
                 data-testid="machinery-quote-btn"
                 size="lg"
