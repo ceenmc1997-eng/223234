@@ -30,79 +30,91 @@ const Pallets = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Real pallet specifications from industry standards
   const palletTypes = [
     {
-      name: "Standard GMA Pallet",
-      dimensions: '48" x 40"',
-      capacity: "2,500 lbs",
-      description: "The most common pallet size in North America, used by grocery, retail, and warehousing industries. Perfect for standard racking systems.",
-      features: ["Industry standard size", "Compatible with all forklifts", "High availability", "Cost-effective"],
+      name: "GMA Stringer Pallet",
+      dimensions: '48" × 40" × 6"',
+      weight: "37 lbs (17 kg)",
+      capacity: "2,500 lbs dynamic",
+      description: "The industry standard pallet in North America, used by 30% of all U.S. pallets. Ideal for grocery, retail, and general warehousing. Compatible with standard truck doors and racking systems.",
+      features: ["GMA Standard size", "2-way or notched 4-way entry", "Hardwood construction", "Easy to repair"],
       popular: true,
     },
     {
-      name: "Block Pallet",
-      dimensions: '48" x 40"',
-      capacity: "5,500 lbs",
-      description: "Heavy-duty four-way entry pallet with blocks instead of stringers. Ideal for heavy loads and automated warehouse systems.",
-      features: ["4-way forklift entry", "Superior load capacity", "Durable construction", "Reusable design"],
+      name: "Block Pallet (4-Way)",
+      dimensions: '48" × 40" × 6"',
+      weight: "45-55 lbs (20-25 kg)",
+      capacity: "4,600 lbs static",
+      description: "Heavy-duty pallet using nine 4×4 inch wood blocks. True four-way forklift entry from all sides. Best for automated warehouse systems and heavy loads.",
+      features: ["True 4-way forklift entry", "9 block design", "Superior durability", "More trip cycles"],
       popular: true,
     },
     {
-      name: "Stringer Pallet",
-      dimensions: '48" x 40"',
-      capacity: "2,200 lbs",
-      description: "Traditional pallet design with wooden stringers for support. Cost-effective solution for standard shipping and storage needs.",
-      features: ["2-way or partial 4-way entry", "Budget-friendly option", "Easy to repair", "Widely available"],
-    },
-    {
-      name: "Euro Pallet (EUR/EPAL)",
-      dimensions: '47.24" x 31.50" (1200x800mm)',
-      capacity: "3,300 lbs",
-      description: "Standard European pallet certified by EPAL. Essential for international shipping to European markets and global logistics.",
-      features: ["EPAL certified", "International standard", "Export ready", "Quality guaranteed"],
+      name: "Euro Pallet (EPAL)",
+      dimensions: '47.24" × 31.50" × 5.7" (1200×800mm)',
+      weight: "55 lbs (25 kg)",
+      capacity: "3,300 lbs (1,500 kg) dynamic",
+      description: "Official EPAL certified European pallet required for export to EU markets. Features 11 boards, 78 nails, 9 blocks. Heat treated per ISPM-15 standards.",
+      features: ["EPAL/EUR certified", "ISPM-15 compliant", "International standard", "4-way entry"],
+      popular: true,
     },
     {
       name: "Half Pallet",
-      dimensions: '48" x 20"',
-      capacity: "1,500 lbs",
-      description: "Compact pallet perfect for retail displays, smaller shipments, and point-of-sale applications in stores.",
-      features: ["Space efficient", "Retail display ready", "Easy handling", "Store-friendly"],
+      dimensions: '48" × 20" × 6"',
+      weight: "22 lbs (10 kg)",
+      capacity: "1,200 lbs",
+      description: "Half the width of standard GMA pallet. Perfect for retail store displays, point-of-sale applications, and smaller shipments that don't require full pallet space.",
+      features: ["Retail display ready", "Space efficient", "Easy manual handling", "Store aisle compatible"],
     },
     {
-      name: "Quarter Pallet",
-      dimensions: '24" x 20"',
-      capacity: "800 lbs",
-      description: "Smallest standard pallet size, ideal for retail floor displays, promotional items, and small quantity shipments.",
-      features: ["Display optimized", "Promotional use", "Manual handling", "Store aisle compatible"],
+      name: "Beverage Pallet",
+      dimensions: '48" × 36" × 6"',
+      weight: "40 lbs (18 kg)",
+      capacity: "3,000 lbs",
+      description: "Slightly narrower than GMA standard, designed specifically for beverage industry. Fits 20oz bottles and cans efficiently. Common in bottling and distribution.",
+      features: ["Beverage industry standard", "Optimized for bottles/cans", "Heavy load capacity", "Efficient stacking"],
     },
     {
-      name: "Oversized Pallet",
-      dimensions: '60" x 48" / Custom',
-      capacity: "Up to 10,000 lbs",
-      description: "Large format pallets for oversized cargo, industrial equipment, and specialized heavy machinery transport.",
-      features: ["Custom dimensions", "Heavy-duty capacity", "Industrial grade", "Specialized applications"],
+      name: "Automotive Pallet",
+      dimensions: '48" × 45" × 6"',
+      weight: "50 lbs (23 kg)",
+      capacity: "3,500 lbs",
+      description: "Wider pallet designed for automotive industry parts and components. Provides extra width for larger automotive parts and assemblies.",
+      features: ["Automotive industry standard", "Extra width for parts", "Heavy-duty construction", "Stackable design"],
+    },
+    {
+      name: "Drum Pallet",
+      dimensions: '48" × 48" × 6"',
+      weight: "48 lbs (22 kg)",
+      capacity: "4,000 lbs",
+      description: "Square pallet designed for 55-gallon drums and barrel storage. Equal dimensions prevent drum overhang and ensure stable stacking.",
+      features: ["Fits 4× 55-gallon drums", "Square design", "Chemical industry standard", "Spill containment ready"],
+    },
+    {
+      name: "Recycled/Reconditioned Pallet",
+      dimensions: '48" × 40" × 6" (Standard)',
+      weight: "35-40 lbs",
+      capacity: "1,500 - 2,500 lbs",
+      description: "Quality inspected reconditioned pallets. Sustainable option with significant cost savings. All pallets meet our quality standards with replaced damaged components.",
+      features: ["Up to 50% cost savings", "Environmentally friendly", "Quality inspected", "Replaced damaged parts"],
     },
     {
       name: "Heat Treated Pallet (ISPM-15)",
-      dimensions: "Various sizes",
-      capacity: "Varies",
-      description: "ISPM-15 certified heat-treated pallets required for international shipping. Guaranteed pest-free for export compliance.",
-      features: ["ISPM-15 certified stamp", "Export compliant", "Pest-free guarantee", "Documentation included"],
+      dimensions: "Various sizes available",
+      weight: "Varies by size",
+      capacity: "Same as base pallet type",
+      description: "Any pallet type heat treated to 56°C core temperature for 30 minutes per ISPM-15 requirements. Required for international export. Includes HT stamp certification.",
+      features: ["ISPM-15 certified stamp", "56°C/30min treatment", "Export compliant", "Pest-free guarantee"],
       popular: true,
-    },
-    {
-      name: "Recycled Pallet",
-      dimensions: "Various sizes",
-      capacity: "1,500 - 2,500 lbs",
-      description: "Eco-friendly reconditioned pallets that meet quality standards. Sustainable choice with significant cost savings.",
-      features: ["Environmentally friendly", "Cost savings up to 50%", "Quality inspected", "Sustainable choice"],
     },
     {
       name: "Custom Pallet",
       dimensions: "Your specifications",
-      capacity: "Custom",
-      description: "Can't find the right size? We manufacture custom pallets to your exact specifications for any unique requirements.",
-      features: ["Any dimension available", "Custom load capacity", "Specialized designs", "Fast turnaround"],
+      weight: "Based on design",
+      capacity: "Engineered to requirement",
+      description: "Can't find the right size? We manufacture custom pallets to your exact specifications. Any dimension, load capacity, or special requirements.",
+      features: ["Any dimension", "Custom load capacity", "Special deck patterns", "Fast turnaround"],
     },
   ];
 
@@ -110,22 +122,22 @@ const Pallets = () => {
     {
       icon: Truck,
       title: "Fast Delivery",
-      description: "Same-day delivery available in Houston area",
+      description: "Same-day available in Houston",
     },
     {
       icon: Shield,
-      title: "Quality Guaranteed",
-      description: "All pallets inspected before shipping",
+      title: "Quality Inspected",
+      description: "Every pallet checked",
     },
     {
       icon: Clock,
-      title: "24hr Quote Response",
-      description: "Get your quote within 24 hours",
+      title: "24hr Response",
+      description: "Quick quote turnaround",
     },
     {
       icon: Star,
-      title: "Volume Discounts",
-      description: "Special pricing for bulk orders",
+      title: "Volume Pricing",
+      description: "Discounts on 100+ units",
     },
   ];
 
@@ -156,7 +168,7 @@ const Pallets = () => {
 
       await axios.post(`${API}/quote`, payload);
       
-      toast.success("Quote request submitted successfully! We'll contact you shortly.");
+      toast.success("Quote request submitted! We'll contact you within 24 hours.");
       
       setFormData({
         name: "",
@@ -170,7 +182,7 @@ const Pallets = () => {
       });
     } catch (error) {
       console.error("Error submitting quote:", error);
-      toast.error("Failed to submit quote request. Please try again.");
+      toast.error("Failed to submit. Please try again or call us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -194,14 +206,13 @@ const Pallets = () => {
               Our Products
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
-              Premium Quality
+              Quality
               <br />
               <span className="text-[#22C55E]">Wooden Pallets</span>
             </h1>
             <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-              From standard GMA pallets to custom configurations, we offer a complete 
-              range of high-quality wooden pallets designed to protect your products and 
-              optimize your supply chain operations.
+              New and recycled pallets in standard and custom sizes. GMA, Euro, Block, 
+              and specialty pallets available. Heat treatment (ISPM-15) for export shipments.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#quote-form">
@@ -221,7 +232,7 @@ const Pallets = () => {
                   className="border-zinc-700 text-white hover:bg-zinc-800 hover:text-white rounded-full px-8 py-6 text-base"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call Now
+                  (713) 670-8118
                 </Button>
               </a>
             </div>
@@ -259,8 +270,8 @@ const Pallets = () => {
               Pallet Types & Sizes
             </h2>
             <p className="text-zinc-400 max-w-2xl mx-auto">
-              Choose from our wide selection of pallet types. All pallets are manufactured 
-              with quality lumber and meet industry standards.
+              Industry standard dimensions and load capacities. All specifications 
+              based on typical construction - actual capacity depends on lumber grade and condition.
             </p>
           </div>
 
@@ -283,17 +294,26 @@ const Pallets = () => {
                 <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center mb-5 group-hover:bg-[#22C55E]/10 transition-colors">
                   <Package className="w-6 h-6 text-[#22C55E]" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-white mb-3">
                   {pallet.name}
                 </h3>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="text-[#22C55E] font-mono text-xs bg-[#22C55E]/10 px-2 py-1 rounded">
-                    {pallet.dimensions}
-                  </span>
-                  <span className="text-zinc-400 font-mono text-xs bg-zinc-800 px-2 py-1 rounded">
-                    {pallet.capacity}
-                  </span>
+                
+                {/* Specs Table */}
+                <div className="bg-zinc-950/50 rounded-lg p-3 mb-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-zinc-500">Dimensions:</span>
+                    <span className="text-[#22C55E] font-mono text-xs">{pallet.dimensions}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-zinc-500">Weight:</span>
+                    <span className="text-zinc-300 font-mono text-xs">{pallet.weight}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-zinc-500">Capacity:</span>
+                    <span className="text-zinc-300 font-mono text-xs">{pallet.capacity}</span>
+                  </div>
                 </div>
+
                 <p className="text-zinc-400 text-sm leading-relaxed mb-5">
                   {pallet.description}
                 </p>
@@ -323,10 +343,10 @@ const Pallets = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                  Need a Custom Solution?
+                  Need a Custom Size?
                 </h3>
                 <p className="text-zinc-400">
-                  We manufacture pallets to your exact specifications. Contact us for custom orders.
+                  We manufacture pallets to your exact specifications. Any dimension, any load requirement.
                 </p>
               </div>
               <div className="flex gap-4">
@@ -366,18 +386,18 @@ const Pallets = () => {
                 Request a Free Quote
               </h2>
               <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
-                Fill out the form and our team will get back to you with a 
-                customized quote within 24 hours. No obligation, no hassle.
+                Tell us what you need and we'll get back to you within 24 hours 
+                with pricing. No obligation.
               </p>
               
               <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-3">
                   <Info className="w-5 h-5 text-[#22C55E] flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Volume Discounts Available</h4>
+                    <h4 className="text-white font-semibold mb-2">Volume Discounts</h4>
                     <p className="text-zinc-400 text-sm">
                       Orders of 100+ pallets qualify for special pricing. 
-                      Contact us for recurring order discounts and long-term partnerships.
+                      Ask about recurring order discounts for long-term partnerships.
                     </p>
                   </div>
                 </div>
@@ -390,19 +410,15 @@ const Pallets = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Custom sizes and specifications</span>
+                  <span className="text-zinc-300">New and recycled options available</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Nationwide delivery available</span>
+                  <span className="text-zinc-300">ISPM-15 heat treatment available</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Heat treatment (ISPM-15) certified</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#22C55E]" />
-                  <span className="text-zinc-300">Quality guaranteed on all orders</span>
+                  <span className="text-zinc-300">Delivery throughout Texas & nationwide</span>
                 </div>
               </div>
 
@@ -413,7 +429,7 @@ const Pallets = () => {
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-[#22C55E]" />
                       <div>
-                        <p className="text-zinc-500 text-xs">Call us directly</p>
+                        <p className="text-zinc-500 text-xs">Call us</p>
                         <p className="text-white font-semibold">(713) 670-8118</p>
                       </div>
                     </div>
@@ -519,7 +535,7 @@ const Pallets = () => {
                           value={pallet.name}
                           className="text-zinc-300 focus:bg-zinc-800 focus:text-white"
                         >
-                          {pallet.name} ({pallet.dimensions})
+                          {pallet.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -549,7 +565,7 @@ const Pallets = () => {
                       name="dimensions"
                       value={formData.dimensions}
                       onChange={handleInputChange}
-                      placeholder='e.g., 48" x 40" x 6"'
+                      placeholder='e.g., 48" × 40" × 6"'
                       data-testid="quote-dimensions-input"
                       className="bg-zinc-950 border-zinc-800 focus:border-[#22C55E] h-12"
                     />
@@ -558,14 +574,14 @@ const Pallets = () => {
 
                 <div className="space-y-2 mb-8">
                   <Label htmlFor="additional_info" className="text-zinc-300">
-                    Additional Requirements
+                    Additional Information
                   </Label>
                   <textarea
                     id="additional_info"
                     name="additional_info"
                     value={formData.additional_info}
                     onChange={handleInputChange}
-                    placeholder="Tell us about your specific needs: delivery location, timeline, special requirements..."
+                    placeholder="Delivery location, timeline, special requirements (heat treatment, export, etc.)"
                     data-testid="quote-additional-info-input"
                     rows={4}
                     className="w-full bg-zinc-950 border border-zinc-800 focus:border-[#22C55E] rounded-md px-3 py-2 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-[#22C55E] resize-none"
@@ -583,7 +599,7 @@ const Pallets = () => {
                 </Button>
 
                 <p className="text-zinc-500 text-xs text-center mt-4">
-                  By submitting, you agree to be contacted regarding your quote request.
+                  We respond to all quote requests within 24 business hours.
                 </p>
               </form>
             </div>
@@ -595,11 +611,10 @@ const Pallets = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Prefer to Speak With Someone?
+            Prefer to Talk?
           </h3>
           <p className="text-zinc-400 mb-8">
-            Our sales team is ready to help you find the perfect pallet solution. 
-            Call us or email directly for immediate assistance.
+            Our team is ready to help. Call or email for immediate assistance.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="tel:+17136708118">
