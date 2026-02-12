@@ -11,8 +11,9 @@ const Home = () => {
     },
     {
       icon: Settings,
-      title: "TPM Services",
-      description: "Total Productive Maintenance ensuring maximum efficiency and longevity for your operations.",
+      title: "TPM Program",
+      description: "Total Pallet Management - we handle your entire pallet operation from supply to disposal.",
+      link: "/tpm",
     },
     {
       icon: Truck,
