@@ -380,6 +380,78 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Brochure Download Section */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="bg-gradient-to-r from-[#22C55E]/10 via-[#22C55E]/5 to-transparent border border-[#22C55E]/20 rounded-2xl p-8 md:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-[#22C55E]/10 rounded-xl flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-[#22C55E]" />
+                  </div>
+                  <span className="text-[#22C55E] text-sm font-mono uppercase tracking-wider">
+                    Company Brochure
+                  </span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Become a G&A Pallet Customer
+                </h3>
+                <p className="text-zinc-400 leading-relaxed mb-6">
+                  Download our company brochure to learn more about our services, 
+                  Total Pallet Management (TPM) program, and get the forms needed 
+                  to register as a new customer or vendor.
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center gap-2 text-sm text-zinc-300">
+                    <span className="w-1.5 h-1.5 bg-[#22C55E] rounded-full" />
+                    Company information & history
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-zinc-300">
+                    <span className="w-1.5 h-1.5 bg-[#22C55E] rounded-full" />
+                    TPM program details
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-zinc-300">
+                    <span className="w-1.5 h-1.5 bg-[#22C55E] rounded-full" />
+                    New account registration forms
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-zinc-300">
+                    <span className="w-1.5 h-1.5 bg-[#22C55E] rounded-full" />
+                    Credit application
+                  </li>
+                </ul>
+                <a 
+                  href="/gapallet-brochure.pdf" 
+                  download="GA-Pallet-Brochure.pdf"
+                  data-testid="download-brochure-btn"
+                >
+                  <Button
+                    size="lg"
+                    className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-8"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Brochure (PDF)
+                  </Button>
+                </a>
+              </div>
+              <div className="hidden lg:block">
+                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
+                  <div className="aspect-[8.5/11] bg-zinc-950 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#22C55E]/5 to-transparent" />
+                    <div className="text-center z-10">
+                      <FileText className="w-16 h-16 text-[#22C55E]/50 mx-auto mb-4" />
+                      <p className="text-white font-bold text-lg">G&A PALLET</p>
+                      <p className="text-zinc-400 text-sm">Company Brochure</p>
+                      <p className="text-zinc-500 text-xs mt-2">PDF • 10 Pages</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Quick Contact CTA */}
       <section className="py-16 md:py-24 bg-zinc-900/30">
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
