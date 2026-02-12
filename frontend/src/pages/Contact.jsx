@@ -228,10 +228,21 @@ const Contact = () => {
               <br />
               <span className="text-[#22C55E]">Together</span>
             </h1>
-            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+            <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-6">
               Have questions about our products or services? Ready to place an order? 
               Our team is here to help you find the perfect pallet solution for your business.
             </p>
+            {/* Business Status Indicator */}
+            <div className="inline-flex items-center gap-3 bg-zinc-900/50 border border-zinc-800 rounded-full px-4 py-2">
+              <span className={`w-2.5 h-2.5 rounded-full ${businessStatus.isOpen ? 'bg-[#22C55E] animate-pulse' : 'bg-red-500'}`} />
+              <span className={`font-medium ${businessStatus.isOpen ? 'text-[#22C55E]' : 'text-red-400'}`}>
+                {businessStatus.message}
+              </span>
+              <span className="text-zinc-500 text-sm">
+                • {businessStatus.isOpen ? businessStatus.closesIn : businessStatus.nextOpen}
+              </span>
+              <span className="text-zinc-600 text-xs">(CST)</span>
+            </div>
           </div>
         </div>
       </section>
