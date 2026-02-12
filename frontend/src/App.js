@@ -1,14 +1,18 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
+import { Suspense, lazy } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Services from "@/pages/Services";
-import Machinery from "@/pages/Machinery";
-import Pallets from "@/pages/Pallets";
-import Contact from "@/pages/Contact";
+import { PageSkeleton } from "@/components/Skeleton";
+
+// Lazy load pages for skeleton effect
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Services = lazy(() => import("@/pages/Services"));
+const Machinery = lazy(() => import("@/pages/Machinery"));
+const Pallets = lazy(() => import("@/pages/Pallets"));
+const Contact = lazy(() => import("@/pages/Contact"));
 
 function App() {
   return (
@@ -16,14 +20,16 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/machinery" element={<Machinery />} />
-            <Route path="/pallets" element={<Pallets />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <Suspense fallback={<PageSkeleton />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/machinery" element={<Machinery />} />
+              <Route path="/pallets" element={<Pallets />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         <Toaster position="bottom-right" theme="dark" />
