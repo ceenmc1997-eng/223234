@@ -113,9 +113,9 @@ code, .mono {
     -webkit-backdrop-filter: blur(16px);
 }
 
-/* Green glow effect */
+/* Green accent border */
 .green-glow {
-    box-shadow: 0 0 60px rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 /* Text selection */
