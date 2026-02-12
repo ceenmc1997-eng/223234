@@ -20,24 +20,26 @@ Build a professional black theme website for G&A Pallet, a pallet sales company 
 ## What's Been Implemented (December 2025)
 
 ### Pages
-1. **Home** - Hero section with industrial warehouse background, stats, services preview, machinery highlight, CTA
-2. **About** - Company mission, vision, values, journey timeline, stats
-3. **Services** - TPM services, custom pallets, repair, heat treatment, recycling, logistics, QA (bento grid layout)
-4. **Machinery** - Champion QC306 & HR100 Wood-Mizer details with specs and features
-5. **Pallets** - 6 pallet types with quote request form
-6. **Contact** - OpenStreetMap with green marker, contact form, info cards
+1. **Home** - Hero with pallet warehouse image, stats, services preview, machinery highlight, multiple CTAs
+2. **About** - Company mission, vision, values, journey timeline, stats  
+3. **Services** - TPM services, custom pallets, repair, heat treatment, recycling, logistics, QA (bento grid)
+4. **Machinery** - Champion QC306 & HR100 Wood-Mizer with specs, features, and wood processing images
+5. **Pallets** - 10 pallet types (GMA, Block, Stringer, Euro, Half, Quarter, Oversized, Heat Treated, Recycled, Custom) with quote form and multiple CTAs
+6. **Contact** - Dark theme map (CARTO tiles via MapLibre GL), custom green marker, contact form
 
 ### Backend APIs
 - POST/GET `/api/quote` - Quote requests storage
 - POST/GET `/api/contact` - Contact form submissions
 
 ### Features
-- Responsive design with mobile navigation
+- Dark theme map using CARTO dark tiles
+- 10 pallet types with "Popular" badges and load capacities
+- Professional pallet/wood processing images throughout
+- Multiple CTAs on each page
+- Responsive mobile navigation
 - Glassmorphism floating navigation
-- Dark theme with green accent colors
-- OpenStreetMap with react-leaflet
-- Form validation and toast notifications
 - Professional typography (Manrope + Inter)
+- Custom green marker on map
 
 ## Prioritized Backlog
 
