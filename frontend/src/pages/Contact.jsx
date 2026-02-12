@@ -330,7 +330,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div>
+            <div id="contact-form-section">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
                 Send Us a Message
               </h2>
