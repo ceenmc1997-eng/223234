@@ -1,47 +1,53 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Gauge, Zap, Shield, Ruler, Settings, CheckCircle } from "lucide-react";
+import { ArrowRight, Gauge, Zap, Shield, Ruler, Settings, CheckCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Machinery = () => {
   const machines = [
     {
       name: "Champion QC306",
-      category: "Pallet Nailer",
-      description: "The Champion QC306 by Viking Engineering is a high-performance automatic pallet nailing system capable of producing 500-600 pallets per shift. It delivers consistent, precise nailing for both standard and custom pallet configurations using new or recycled lumber.",
-      image: "https://images.unsplash.com/photo-1767281075989-7571356d477e?auto=format&fit=crop&w=1000&q=80",
+      category: "Viking Engineering - Pallet Nailer",
+      description: "With the ability to use recycled and low grade lumber, the Champion QC306 Pallet Nailer is a single operator system that produces upwards of 500-600 pallets per shift. The flexibility of the QC306 Pallet Machine allows for optional mat and block production capabilities, extended pallet sizes, and quick changeovers.",
+      image: "https://www.vikingeng.com/media/contentmanager/content/pallet-machine-champion-qc306.jpg",
       specs: [
-        { label: "Speed", value: "High Output" },
-        { label: "Precision", value: "± 0.5mm" },
-        { label: "Operation", value: "Automatic" },
-        { label: "Capacity", value: "Industrial" },
+        { label: "Output", value: "500-600/shift" },
+        { label: "Stringer", value: "4 Standard" },
+        { label: "Length", value: '72" Standard' },
+        { label: "Operation", value: "Single Operator" },
       ],
       features: [
-        "Automatic nail feeding system",
-        "Adjustable for multiple pallet sizes",
-        "Pneumatic operation for reliability",
-        "Quick changeover between configurations",
-        "Built-in safety features",
-        "Low maintenance requirements",
+        "New and reclaimed lumber can be used",
+        "40 pallet configuration storage",
+        "Automated pallet turnover",
+        "Automated stacking",
+        "Programmable controllers",
+        "Quick change stringer rails",
+        "Hydraulic nailing",
+        "English/Spanish operator screens",
+        "Direct network link for remote diagnostics",
       ],
     },
     {
       name: "HR100 Horizontal Band Resaw",
-      category: "Wood-Mizer",
-      description: "The Wood-Mizer HR100 Horizontal Band Resaw is engineered for precision lumber resawing. It features thin-kerf blades that transform rough lumber into perfectly dimensioned boards with minimal waste and maximum efficiency for pallet production.",
-      image: "https://images.unsplash.com/photo-1720036236694-d0a231c52563?auto=format&fit=crop&w=1000&q=80",
+      category: "Wood-Mizer - Horizontal Resaw",
+      description: "The Wood-Mizer horizontal band resaw is engineered for precision lumber resawing. It efficiently turns cants into boards and lumber with minimal labor, featuring thin-kerf blades that maximize yield from every log. Perfect for pallet board production with consistent, accurate cuts.",
+      image: "https://woodmizer.com/media/catalog/product/h/r/hr300.jpg",
       specs: [
-        { label: "Cut Capacity", value: "Up to 12\"" },
-        { label: "Blade Speed", value: "Variable" },
-        { label: "Feed System", value: "Hydraulic" },
-        { label: "Motor", value: "Industrial" },
+        { label: "Type", value: "Horizontal Band" },
+        { label: "Feed", value: "Steel Belt" },
+        { label: "Blade", value: "Thin-Kerf" },
+        { label: "Control", value: "Variable Speed" },
       ],
       features: [
+        "Steel belt conveyor system",
         "Precision blade guides for accurate cuts",
-        "Hydraulic feed for consistent speed",
-        "Variable blade speed control",
-        "Efficient sawdust collection system",
+        "Variable feed rate control",
+        "Hold-down rollers for stability",
+        "Efficient sawdust collection",
         "Easy blade change mechanism",
         "Heavy-duty construction",
+        "Minimal lumber waste",
+        "High volume board production",
       ],
     },
   ];
@@ -50,22 +56,22 @@ const Machinery = () => {
     {
       icon: Gauge,
       title: "High Throughput",
-      description: "Our machinery enables us to produce thousands of pallets monthly without compromising quality.",
+      description: "500-600 pallets per shift with our Champion QC306",
     },
     {
       icon: Zap,
       title: "Efficiency",
-      description: "State-of-the-art equipment minimizes waste and maximizes material utilization.",
+      description: "Thin-kerf blades minimize waste and maximize yield",
     },
     {
       icon: Shield,
       title: "Consistency",
-      description: "Automated systems ensure every pallet meets exact specifications.",
+      description: "Automated systems ensure every pallet meets specs",
     },
     {
       icon: Ruler,
       title: "Precision",
-      description: "Advanced machinery delivers accuracy within tight tolerances.",
+      description: "Programmable controls for accurate dimensions",
     },
   ];
 
@@ -89,18 +95,37 @@ const Machinery = () => {
                 machinery combines precision engineering with industrial durability 
                 to ensure consistent quality in every pallet we produce.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 mb-8">
                 <span className="spec-tag">Champion QC306</span>
-                <span className="spec-tag">HR100 Wood-Mizer</span>
-                <span className="spec-tag">Precision Cutting</span>
+                <span className="spec-tag">Wood-Mizer Resaw</span>
+                <span className="spec-tag">Precision Engineering</span>
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/pallets">
+                  <Button
+                    className="bg-[#22C55E] text-black hover:bg-[#22C55E]/90 btn-glow rounded-full px-6"
+                  >
+                    Request Quote
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <a href="tel:+17136708118">
+                  <Button
+                    variant="outline"
+                    className="border-zinc-700 text-white hover:bg-zinc-800 hover:text-white rounded-full px-6"
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Us
+                  </Button>
+                </a>
               </div>
             </div>
             <div className="relative">
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
-              <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
+              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
                 <img
-                  src="https://images.unsplash.com/photo-1759159091728-e2c87b9d9315?auto=format&fit=crop&w=1000&q=80"
-                  alt="Industrial machinery for pallet production"
+                  src="https://www.vikingeng.com/media/contentmanager/content/pallet-machine-champion-qc306-2.jpg"
+                  alt="Champion QC306 Pallet Nailer Machine"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
@@ -110,9 +135,9 @@ const Machinery = () => {
       </section>
 
       {/* Capabilities */}
-      <section className="py-16 md:py-24 bg-zinc-900/30">
+      <section className="py-12 md:py-16 bg-zinc-900/30">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {capabilities.map((cap, index) => (
               <div
                 key={cap.title}
@@ -122,7 +147,7 @@ const Machinery = () => {
                 <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <cap.icon className="w-6 h-6 text-[#22C55E]" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{cap.title}</h3>
+                <h3 className="text-base font-semibold text-white mb-2">{cap.title}</h3>
                 <p className="text-zinc-400 text-sm">{cap.description}</p>
               </div>
             ))}
@@ -133,28 +158,28 @@ const Machinery = () => {
       {/* Machine Details */}
       <section className="py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="space-y-24">
+          <div className="space-y-32">
             {machines.map((machine, index) => (
               <div
                 key={machine.name}
                 data-testid={`machine-${index}`}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start ${
+                  index % 2 === 1 ? "" : ""
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="relative">
                     <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
-                    <div className="relative rounded-xl overflow-hidden border border-zinc-800 green-glow">
+                    <div className="relative rounded-xl overflow-hidden border border-zinc-800 green-glow bg-zinc-900">
                       <img
                         src={machine.image}
                         alt={machine.name}
-                        className="w-full aspect-[4/3] object-cover"
+                        className="w-full aspect-[4/3] object-contain bg-white"
                       />
                     </div>
                   </div>
                   {/* Specs Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
                     {machine.specs.map((spec) => (
                       <div
                         key={spec.label}
@@ -171,10 +196,10 @@ const Machinery = () => {
                   </div>
                 </div>
                 <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <span className="text-[#22C55E] text-sm font-mono uppercase tracking-wider mb-3 block">
+                  <span className="text-[#22C55E] text-sm font-mono uppercase tracking-wider mb-4 block">
                     {machine.category}
                   </span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
                     {machine.name}
                   </h2>
                   <p className="text-zinc-400 text-base leading-relaxed mb-8">
@@ -182,12 +207,14 @@ const Machinery = () => {
                   </p>
                   <div className="space-y-3">
                     <h4 className="text-white font-semibold mb-4">Key Features</h4>
-                    {machine.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-[#22C55E] flex-shrink-0" />
-                        <span className="text-zinc-300 text-sm">{feature}</span>
-                      </div>
-                    ))}
+                    <div className="grid grid-cols-1 gap-3">
+                      {machine.features.map((feature) => (
+                        <div key={feature} className="flex items-center gap-3">
+                          <CheckCircle className="w-5 h-5 text-[#22C55E] flex-shrink-0" />
+                          <span className="text-zinc-300 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -238,10 +265,10 @@ const Machinery = () => {
             </div>
             <div className="relative">
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
-              <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
+              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
                 <img
-                  src="https://images.unsplash.com/photo-1634672652995-ee7525bce595?auto=format&fit=crop&w=1000&q=80"
-                  alt="Lumber and wood processing"
+                  src="https://www.vikingeng.com/media/contentmanager/content/pallet-machine-champion-qc306-4.jpg"
+                  alt="Champion QC306 in operation"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
