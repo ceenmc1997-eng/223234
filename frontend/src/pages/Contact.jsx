@@ -114,7 +114,7 @@ const Contact = () => {
       icon: MapPin,
       title: "Address",
       content: "8827 Clinton Dr",
-      subcontent: "Houston, TX 77029",
+      subcontent: "Houston, TX 77029, USA",
       link: "https://maps.google.com/?q=8827+Clinton+Dr,+Houston,+TX+77029",
     },
     {
@@ -132,10 +132,52 @@ const Contact = () => {
     {
       icon: Clock,
       title: "Business Hours",
-      content: "Mon - Fri: 9am - 5pm",
-      subcontent: "Saturday: 10am - 2pm",
+      content: "Mon - Fri: 8am - 5pm",
+      subcontent: "Sat - Sun: Closed",
     },
   ];
+
+  // Check if business is currently open (Houston timezone - Central Time)
+  const getBusinessStatus = () => {
+    const now = new Date();
+    const houstonTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+    const day = houstonTime.getDay(); // 0 = Sunday, 6 = Saturday
+    const hour = houstonTime.getHours();
+    const minutes = houstonTime.getMinutes();
+    
+    // Closed on weekends (Saturday = 6, Sunday = 0)
+    if (day === 0 || day === 6) {
+      return { isOpen: false, message: "Closed", nextOpen: day === 6 ? "Opens Monday 8am" : "Opens Tomorrow 8am" };
+    }
+    
+    // Open Monday-Friday 8am-5pm
+    if (hour >= 8 && hour < 17) {
+      const closeTime = 17 - hour;
+      return { isOpen: true, message: "Open Now", closesIn: `Closes in ${closeTime}h` };
+    }
+    
+    // Before 8am on weekday
+    if (hour < 8) {
+      return { isOpen: false, message: "Closed", nextOpen: `Opens today at 8am` };
+    }
+    
+    // After 5pm on weekday
+    if (day === 5) { // Friday
+      return { isOpen: false, message: "Closed", nextOpen: "Opens Monday 8am" };
+    }
+    
+    return { isOpen: false, message: "Closed", nextOpen: "Opens tomorrow 8am" };
+  };
+
+  const [businessStatus, setBusinessStatus] = useState(getBusinessStatus());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBusinessStatus(getBusinessStatus());
+    }, 60000); // Update every minute
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
