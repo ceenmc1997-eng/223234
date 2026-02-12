@@ -16,15 +16,14 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(34, 197, 94, 0.1);
 }
 
-/* Button glow */
+/* Button style - clean, no shadows */
 .btn-glow {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .btn-glow:hover {
-    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+    opacity: 0.95;
 }
 
 /* Navigation link hover */
