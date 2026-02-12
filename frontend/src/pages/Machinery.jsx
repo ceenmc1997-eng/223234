@@ -7,8 +7,8 @@ const Machinery = () => {
     {
       name: "Champion QC306",
       category: "Pallet Nailer",
-      description: "The Champion QC306 is a high-performance automatic pallet nailing system designed for maximum efficiency. It delivers consistent, precise nailing for both standard and custom pallet configurations.",
-      image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1000&q=80",
+      description: "The Champion QC306 by Viking Engineering is a high-performance automatic pallet nailing system capable of producing 500-600 pallets per shift. It delivers consistent, precise nailing for both standard and custom pallet configurations using new or recycled lumber.",
+      image: "https://images.unsplash.com/photo-1767281075989-7571356d477e?auto=format&fit=crop&w=1000&q=80",
       specs: [
         { label: "Speed", value: "High Output" },
         { label: "Precision", value: "± 0.5mm" },
@@ -27,8 +27,8 @@ const Machinery = () => {
     {
       name: "HR100 Horizontal Band Resaw",
       category: "Wood-Mizer",
-      description: "The Wood-Mizer HR100 Horizontal Band Resaw is engineered for precision lumber resawing. It transforms rough lumber into perfectly dimensioned boards with minimal waste and maximum efficiency.",
-      image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1000&q=80",
+      description: "The Wood-Mizer HR100 Horizontal Band Resaw is engineered for precision lumber resawing. It features thin-kerf blades that transform rough lumber into perfectly dimensioned boards with minimal waste and maximum efficiency for pallet production.",
+      image: "https://images.unsplash.com/photo-1720036236694-d0a231c52563?auto=format&fit=crop&w=1000&q=80",
       specs: [
         { label: "Cut Capacity", value: "Up to 12\"" },
         { label: "Blade Speed", value: "Variable" },
@@ -99,8 +99,8 @@ const Machinery = () => {
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80"
-                  alt="Industrial machinery"
+                  src="https://images.unsplash.com/photo-1759159091728-e2c87b9d9315?auto=format&fit=crop&w=1000&q=80"
+                  alt="Industrial machinery for pallet production"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
@@ -240,8 +240,8 @@ const Machinery = () => {
               <div className="absolute -inset-4 bg-[#22C55E]/10 rounded-2xl blur-2xl" />
               <div className="relative img-zoom rounded-xl overflow-hidden border border-zinc-800">
                 <img
-                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1000&q=80"
-                  alt="Equipment maintenance"
+                  src="https://images.unsplash.com/photo-1634672652995-ee7525bce595?auto=format&fit=crop&w=1000&q=80"
+                  alt="Lumber and wood processing"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
